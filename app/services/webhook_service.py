@@ -13,13 +13,9 @@ PRIORIDADE_ALTA = "prioridade_alta"
 PRIORIDADE_NORMAL = "prioridade_normal"
 
 
+# app/services/webhook_service.py
 class WebhookService:
-    def __init__(
-        self,
-        webhook_repo: WebhookRepository,
-        client_repo: ClientRepository,
-        pipefy_service: PipefyService
-    ):
+    def __init__(self, webhook_repo: WebhookRepository, client_repo: ClientRepository, pipefy_service: PipefyService):
         self.webhook_repo = webhook_repo
         self.client_repo = client_repo
         self.pipefy_service = pipefy_service
