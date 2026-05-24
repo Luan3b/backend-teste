@@ -7,11 +7,7 @@ from app.services.pipefy_service import PipefyService
 
 
 class ClientService:
-    def __init__(
-        self,
-        client_repo: ClientRepository,
-        pipefy_service: PipefyService
-    ):
+    def __init__(self, client_repo: ClientRepository, pipefy_service: PipefyService):
         self.client_repo = client_repo
         self.pipefy_service = pipefy_service
 
