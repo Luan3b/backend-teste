@@ -91,7 +91,29 @@ curl -X 'POST' \
     "timestamp": "2026-05-24T19:30:00Z"
   }'
 ```
-☁️ Visão de Produção (AWS)Em um ambiente produtivo, a arquitetura poderia evoluir para um modelo serverless e distribuído utilizando serviços gerenciados da AWS, garantindo escalabilidade, resiliência e alta disponibilidade.🗺️ Arquitetura PropostaAmazon API Gateway → Exposição segura dos endpoints HTTP.AWS Lambda → Processamento serverless das regras de negócio.Amazon RDS / Aurora PostgreSQL → Persistência relacional dos clientes.Amazon DynamoDB → Controle de idempotência dos webhooks.Amazon SQS → Desacoplamento e processamento assíncrono de eventos.Amazon CloudWatch → Logs, métricas e monitoramento de performance.Amazon Route 53 → Gerenciamento de DNS e failover regional automatizado.⚙️ Fluxo ArquiteturalPlaintextClient Request
+☁️ Visão de Produção (AWS)
+
+Em um ambiente produtivo, a arquitetura poderia evoluir para um modelo serverless e distribuído utilizando serviços gerenciados da AWS, garantindo escalabilidade, resiliência e alta disponibilidade.
+
+🗺️ Arquitetura Proposta
+
+Amazon API Gateway → Exposição segura dos endpoints HTTP.
+
+AWS Lambda → Processamento serverless das regras de negócio.
+
+Amazon RDS / Aurora PostgreSQL → Persistência relacional dos clientes.
+
+Amazon DynamoDB → Controle de idempotência dos webhooks.
+
+Amazon SQS → Desacoplamento e processamento assíncrono de eventos.
+
+Amazon CloudWatch → Logs, métricas e monitoramento de performance.
+
+Amazon Route 53 → Gerenciamento de DNS e failover regional automatizado.
+
+
+⚙️ Fluxo ArquiteturalPlaintextClient Request
+```
       │
       ▼
  API Gateway
@@ -110,4 +132,33 @@ Webhook Processor
       │
       ▼
   Pipefy API
-📈 Estratégia de EscalabilidadeA utilização do AWS Lambda permite escalabilidade automática e horizontal baseada no volume exato de requisições recebidas, reduzindo o custo ocioso a zero.O desacoplamento via Amazon SQS reduz os impactos de picos repentinos de tráfego (Spike Buffering) e aumenta a resiliência no processamento assíncrono dos webhooks.O DynamoDB é escalado especificamente para o controle avançado de idempotência, devido à sua latência na casa dos milissegundos e alto desempenho para consultas rápidas por event_id.O Amazon RDS/Aurora assume a responsabilidade pelos dados relacionais dos clientes, garantindo consistência transacional ACID e integridade absoluta das informações cadastrais.🧱 Resiliência a Desastres (Failover de Região Global)Em um cenário de indisponibilidade regional da AWS, o Amazon Route 53 detecta automaticamente falhas de conectividade por meio de Health Checks de borda e redireciona todo o tráfego global para uma região secundária saudável em poucos segundos.Os registros de eventos processados anteriormente são replicados em tempo real utilizando DynamoDB Global Tables, garantindo a continuidade do mecanismo de idempotência mesmo após o failover entre continentes.Para o banco relacional, o Amazon Aurora Global Database permite replicação síncrona entre regiões e promoção automatizada da réplica secundária a cluster de escrita principal em menos de um minuto, mitigando a indisponibilidade e minimizando a perda de dados.Essa estratégia proporciona:Alta disponibilidade contínua (Active-Active)Recuperação automatizada contra desastres de infraestruturaContinuidade operacional estávelBaixíssimo tempo de recuperação (RTO)Perda de dados próxima a zero (RPO)
+```
+📈 Estratégia de EscalabilidadeA
+
+utilização do AWS Lambda permite escalabilidade automática e horizontal baseada no volume exato de requisições recebidas, reduzindo o custo ocioso a zero.
+
+O desacoplamento via Amazon SQS reduz os impactos de picos repentinos de tráfego (Spike Buffering) e aumenta a resiliência no processamento assíncrono dos webhooks.
+
+O DynamoDB é escalado especificamente para o controle avançado de idempotência, devido à sua latência na casa dos milissegundos e alto desempenho para consultas rápidas por ```event_id```.
+
+O Amazon RDS/Aurora assume a responsabilidade pelos dados relacionais dos clientes, garantindo consistência transacional ACID e integridade absoluta das informações cadastrais.
+
+🧱 Resiliência a Desastres (Failover de Região Global)
+
+Em um cenário de indisponibilidade regional da AWS, o Amazon Route 53 detecta automaticamente falhas de conectividade por meio de Health Checks de borda e redireciona todo o tráfego global para uma região secundária saudável em poucos segundos.
+
+Os registros de eventos processados anteriormente são replicados em tempo real utilizando DynamoDB Global Tables, garantindo a continuidade do mecanismo de idempotência mesmo após o failover entre continentes.
+
+Para o banco relacional, o Amazon Aurora Global Database permite replicação síncrona entre regiões e promoção automatizada da réplica secundária a cluster de escrita principal em menos de um minuto, mitigando a indisponibilidade e minimizando a perda de dados.
+
+Essa estratégia proporciona:
+
+Alta disponibilidade contínua (Active-Active)
+
+Recuperação automatizada contra desastres de infraestrutura
+
+Continuidade operacional estável
+
+Baixíssimo tempo de recuperação (RTO)
+
+Perda de dados próxima a zero (RPO)
