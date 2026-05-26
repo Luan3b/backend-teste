@@ -40,7 +40,7 @@ pip install -r requirements.txt
 
 A API inicializará com sucesso e estará acessível em 
 ```
-http://127.0.0.1:8000.
+http://127.0.0.1:8000
 ```
 
 🎛️ Painel Integrado de Controle (Substituto do Swagger)
