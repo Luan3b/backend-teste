@@ -4,14 +4,10 @@ from sqlalchemy.exc import SQLAlchemyError
 from app.models.client import Client
 from app.schemas.client_schema import ClientCreate
 
-
 class ClientRepository:
     def __init__(self, db: Session):
         self.db = db
 
-    # ----------------------
-    # READ
-    # ----------------------
     def get_by_email(self, email: str) -> Optional[Client]:
         return (
             self.db.query(Client)
@@ -26,9 +22,6 @@ class ClientRepository:
             .first()
         )
 
-    # ----------------------
-    # CREATE
-    # ----------------------
     def create(self, client_in: ClientCreate) -> Client:
         client = Client(
             **client_in.model_dump(),
@@ -47,9 +40,6 @@ class ClientRepository:
 
         return client
 
-    # ----------------------
-    # UPDATE
-    # ----------------------
     def update_status_and_priority(
         self,
         client_id: int,

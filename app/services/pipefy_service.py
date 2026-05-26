@@ -23,11 +23,9 @@ class PipefyService:
         }
         """
 
-        # Variáveis estruturadas simulando o envio real.
-        # No Pipefy, dados customizados populam a propriedade 'fields_attributes'
         variables = {
             "input": {
-                "pipe_id": "301548291",  # ID fictício do Pipe (esteira de processos)
+                "pipe_id": "301548291", 
                 "title": f"Análise Patrimonial - {nome}",
                 "fields_attributes": [
                     {"field_id": "email_do_cliente", "field_value": email},
@@ -37,7 +35,6 @@ class PipefyService:
             }
         }
 
-        # Exibe no terminal o payload idêntico ao que iria para a produção
         logger.info("[Pipefy GraphQL] Executando Mutation: createCard")
         logger.info(f"[Pipefy GraphQL] Query String: {query}")
         logger.info(f"[Pipefy GraphQL] Variables Payload: {variables}")
@@ -45,8 +42,6 @@ class PipefyService:
         return {"query": query, "variables": variables}
 
     def simulate_update_card_field(self, card_id: str, status: str, prioridade: str) -> Dict[str, Any]:
-        # Nota de busca na Doc: Para alterar propriedades customizadas de um card,
-        # o Pipefy adota a mutation 'updateCardField' que manipula um campo por vez.
         query = """
         mutation UpdateClientCardField($input: UpdateCardFieldInput!) {
           updateCardField(input: $input) {
@@ -57,7 +52,6 @@ class PipefyService:
         }
         """
 
-        # Simulação alterando o campo customizado que mapeia a prioridade calculada
         variables = {
             "input": {
                 "card_id": card_id,

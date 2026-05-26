@@ -9,7 +9,6 @@ from app.services.pipefy_service import PipefyService
 
 router = APIRouter(prefix="/webhooks", tags=["Webhooks"])
 
-
 @router.post("/pipefy/card-updated", status_code=status.HTTP_200_OK)
 def card_updated_webhook_endpoint(payload: WebhookPayload, db: Session = Depends(get_db)):
 

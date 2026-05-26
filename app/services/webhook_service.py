@@ -5,14 +5,11 @@ from app.repositories.webhook_repository import WebhookRepository
 from app.schemas.webhook_schema import WebhookPayload
 from app.services.pipefy_service import PipefyService
 
-
 STATUS_PROCESSADO = "Processado"
 
 PRIORIDADE_ALTA = "prioridade_alta"
 PRIORIDADE_NORMAL = "prioridade_normal"
 
-
-# app/services/webhook_service.py
 class WebhookService:
     def __init__(self, webhook_repo: WebhookRepository, client_repo: ClientRepository, pipefy_service: PipefyService):
         self.webhook_repo = webhook_repo

@@ -1,6 +1,5 @@
 def test_webhook_prioridade_alta(client):
 
-    # cria cliente
     client.post(
         "/clientes",
         json={
