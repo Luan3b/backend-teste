@@ -46,7 +46,7 @@ http://127.0.0.1:8000
 🎛️ Painel Integrado de Controle (Substituto do Swagger)
 Para testar a aplicação de forma totalmente visual, interativa e simulando cenários de erro (e-mail duplicado, cálculo patrimonial e idempotência), abra o seu navegador e acesse a rota oficial de documentação:
 ```
-👉 http://127.0.0.1:8000/docs
+http://127.0.0.1:8000/docs
 ```
 
 🧪 Execução dos Testes Automatizados
