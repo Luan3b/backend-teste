@@ -1,5 +1,4 @@
 from fastapi import HTTPException, status
-
 from app.models.client import Client
 from app.repositories.client_repository import ClientRepository
 from app.schemas.client_schema import ClientCreate

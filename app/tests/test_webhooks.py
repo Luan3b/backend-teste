@@ -4,8 +4,8 @@ def test_webhook_prioridade_alta(client):
     client.post(
         "/clientes",
         json={
-            "cliente_nome": "Maria",
-            "cliente_email": "maria@email.com",
+            "cliente_nome": "sonia",
+            "cliente_email": "sonia@email.com",
             "tipo_solicitacao": "Análise",
             "valor_patrimonio": 300000
         }
@@ -14,7 +14,7 @@ def test_webhook_prioridade_alta(client):
     payload = {
         "event_id": "evt_001",
         "card_id": "card_001",
-        "cliente_email": "maria@email.com",
+        "cliente_email": "sonia@email.com",
         "timestamp": "2026-05-18T12:00:00Z"
     }
 
@@ -35,8 +35,8 @@ def test_webhook_prioridade_normal(client):
     client.post(
         "/clientes",
         json={
-            "cliente_nome": "Carlos",
-            "cliente_email": "carlos@email.com",
+            "cliente_nome": "felipe",
+            "cliente_email": "felipe@email.com",
             "tipo_solicitacao": "Análise",
             "valor_patrimonio": 100000
         }
@@ -45,7 +45,7 @@ def test_webhook_prioridade_normal(client):
     payload = {
         "event_id": "evt_002",
         "card_id": "card_002",
-        "cliente_email": "carlos@email.com",
+        "cliente_email": "felipe@email.com",
         "timestamp": "2026-05-18T12:00:00Z"
     }
 
@@ -66,8 +66,8 @@ def test_webhook_evento_duplicado(client):
     client.post(
         "/clientes",
         json={
-            "cliente_nome": "Pedro",
-            "cliente_email": "pedro@email.com",
+            "cliente_nome": "luiz",
+            "cliente_email": "luiz@email.com",
             "tipo_solicitacao": "Análise",
             "valor_patrimonio": 500000
         }
@@ -76,7 +76,7 @@ def test_webhook_evento_duplicado(client):
     payload = {
         "event_id": "evt_duplicate",
         "card_id": "card_003",
-        "cliente_email": "pedro@email.com",
+        "cliente_email": "luiz@email.com",
         "timestamp": "2026-05-18T12:00:00Z"
     }
 

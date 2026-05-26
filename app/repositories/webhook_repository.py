@@ -1,8 +1,6 @@
 from typing import Optional
-
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
-
 from app.models.webhook_event import WebhookEvent
 from app.schemas.webhook_schema import WebhookPayload
 

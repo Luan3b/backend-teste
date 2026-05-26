@@ -1,8 +1,6 @@
 from typing import Optional
-
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
-
 from app.models.client import Client
 from app.schemas.client_schema import ClientCreate
 

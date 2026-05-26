@@ -1,6 +1,5 @@
 from fastapi import HTTPException, status
 from sqlalchemy.exc import IntegrityError
-
 from app.repositories.client_repository import ClientRepository
 from app.repositories.webhook_repository import WebhookRepository
 from app.schemas.webhook_schema import WebhookPayload
