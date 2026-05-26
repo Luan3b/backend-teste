@@ -30,7 +30,7 @@ cd backend-teste
 ```Bash
 python3 -m venv venv
 source venv/bin/activate
-pip install -r requisitos.txt
+pip install -r requirements.txt
 ```
 
 3. Executar o Servidor de Desenvolvimento (Uvicorn)
