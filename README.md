@@ -57,10 +57,10 @@ python -m pytest -v
 ```
 Cenários cobertos:
 ```
-test_webhook_prioridade_alta: Valida o gatilho do webhook e classificação patrimonial VIP ($\ge R\$$ 200.000,00).
+test_webhook_prioridade_alta: Valida o gatilho do webhook e classificação patrimonial VIP (>= R$ 200.000,00).
 ```
 ```
-test_webhook_prioridade_normal: Valida classificação patrimonial padrão ($< R\$$ 200.000,00).
+test_webhook_prioridade_normal: Valida classificação patrimonial padrão (< R$ 200.000,00).
 ```
 ```
 test_webhook_evento_duplicado: Valida a barreira de segurança de Idempotência (Status 409).
