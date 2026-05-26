@@ -19,15 +19,57 @@ A aplicação adota práticas recomendadas de mercado, como **Arquitetura em Cam
 ## 🚀 Instruções de Execução Local
 
 ### 1. Clonar o Repositório e Acessar o Diretório
+
 ```bash
-git clone https://github.com/Luan3b/backend-teste.git
+git clone [https://github.com/Luan3b/backend-teste.git](https://github.com/Luan3b/backend-teste.git)
 cd backend-teste
-2. Configurar o Ambiente Virtual (venv) e Instalar DependênciasBashpython3 -m venv venv
+```
+
+2. Configurar o Ambiente Virtual (venv) e Instalar Dependências
+
+```Bash
+python3 -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt
-3. Executar o Servidor de Desenvolvimento (Uvicorn)Bashuvicorn app.main:app --reload
-A API inicializará com sucesso e estará acessível em http://127.0.0.1:8000.🎛️ Painel Integrado de Controle (Substituto do Swagger)Para testar a aplicação de forma totalmente visual, interativa e simulando cenários de erro (e-mail duplicado, cálculo patrimonial e idempotência), abra o seu navegador e acesse a rota oficial de documentação:👉 http://127.0.0.1:8000/docs🧪 Execução dos Testes AutomatizadosOs testes rodam de forma totalmente isolada em um banco de dados SQLite em memória (sqlite:///:memory:), garantindo velocidade e integridade.Com o ambiente virtual ativo, execute na raiz do projeto:Bashpython -m pytest -v
-Cenários cobertos:test_webhook_prioridade_alta: Valida o gatilho do webhook e classificação patrimonial VIP ($\ge R\$$ 200.000,00).test_webhook_prioridade_normal: Valida classificação patrimonial padrão ($< R\$$ 200.000,00).test_webhook_evento_duplicado: Valida a barreira de segurança de Idempotência (Status 409).📡 Exemplos de Requisição (cURL)Fluxo 1: Criação de Cliente (POST /clientes)Bashcurl -X 'POST' \
+pip install -r requisitos.txt
+```
+
+3. Executar o Servidor de Desenvolvimento (Uvicorn)
+ ```Bash
+  uvicorn app.main:app --reload
+```
+
+A API inicializará com sucesso e estará acessível em 
+```
+http://127.0.0.1:8000.
+```
+
+🎛️ Painel Integrado de Controle (Substituto do Swagger)
+Para testar a aplicação de forma totalmente visual, interativa e simulando cenários de erro (e-mail duplicado, cálculo patrimonial e idempotência), abra o seu navegador e acesse a rota oficial de documentação:
+```
+👉 http://127.0.0.1:8000/docs
+```
+
+🧪 Execução dos Testes Automatizados
+Os testes rodam de forma totalmente isolada em um banco de dados SQLite em memória (sqlite:///:memory:), garantindo velocidade e integridade.
+Com o ambiente virtual ativo, execute na raiz do projeto:
+```Bash
+python -m pytest -v
+```
+Cenários cobertos:
+```
+test_webhook_prioridade_alta: Valida o gatilho do webhook e classificação patrimonial VIP ($\ge R\$$ 200.000,00).
+```
+```
+test_webhook_prioridade_normal: Valida classificação patrimonial padrão ($< R\$$ 200.000,00).
+```
+```
+test_webhook_evento_duplicado: Valida a barreira de segurança de Idempotência (Status 409).
+```
+📡 Exemplos de Requisição (cURL)
+Fluxo 1: Criação de Cliente ```(POST /clientes)```
+
+```Bash
+curl -X 'POST' \
   '[http://127.0.0.1:8000/clientes](http://127.0.0.1:8000/clientes)' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -36,7 +78,10 @@ Cenários cobertos:test_webhook_prioridade_alta: Valida o gatilho do webhook e c
     "tipo_solicitacao": "Aporte de Capital",
     "valor_patrimonio": 250000.00
   }'
-Fluxo 2: Disparo de Webhook do Pipefy (POST /webhooks/pipefy/card-updated)Bashcurl -X 'POST' \
+```
+Fluxo 2: Disparo de Webhook do Pipefy ```(POST /webhooks/pipefy/card-updated)```
+```Bash
+curl -X 'POST' \
   '[http://127.0.0.1:8000/webhooks/pipefy/card-updated](http://127.0.0.1:8000/webhooks/pipefy/card-updated)' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -45,6 +90,7 @@ Fluxo 2: Disparo de Webhook do Pipefy (POST /webhooks/pipefy/card-updated)Bashcu
     "cliente_email": "luan@email.com",
     "timestamp": "2026-05-24T19:30:00Z"
   }'
+```
 ☁️ Visão de Produção (AWS)Em um ambiente produtivo, a arquitetura poderia evoluir para um modelo serverless e distribuído utilizando serviços gerenciados da AWS, garantindo escalabilidade, resiliência e alta disponibilidade.🗺️ Arquitetura PropostaAmazon API Gateway → Exposição segura dos endpoints HTTP.AWS Lambda → Processamento serverless das regras de negócio.Amazon RDS / Aurora PostgreSQL → Persistência relacional dos clientes.Amazon DynamoDB → Controle de idempotência dos webhooks.Amazon SQS → Desacoplamento e processamento assíncrono de eventos.Amazon CloudWatch → Logs, métricas e monitoramento de performance.Amazon Route 53 → Gerenciamento de DNS e failover regional automatizado.⚙️ Fluxo ArquiteturalPlaintextClient Request
       │
       ▼
